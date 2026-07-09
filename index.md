@@ -6,6 +6,7 @@
 
 - [Λάμπα με χρονοδιακόπτη](lamp.md)
 - [Φανάρια - Statistical Model Checking](traffic_lights.md)
+- [Φανάρια - Stratego](traffic_lights_stratego.md)
 
 Παρακάτω βρίσκονται τα πλήρη UPPAAL μοντέλα για το κάθε παράδειγμα (μαζί με τα queries) και μπορείτε να τα ανοίξετε με το UPPAAL κατεβάζοντάς το από [εδώ](https://uppaal.org/downloads/).
 
