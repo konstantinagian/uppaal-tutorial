@@ -7,6 +7,6 @@
 - [Λάμπα με χρονοδιακόπτη](lamp.md)
 - [Φανάρια - Statistical Model Checking](traffic_lights.md)
 
-Παρακάτω βρίσκονται τα πλήρη UPPAAL μοντέλα για το κάθε παράδειγμα (μαζί με τα queries) και μπορείτε να τα ανοίξετε με το UPPAAL κατεβάζοντάς το από [εδώ](https://uppaal.org/downloads/)
+Παρακάτω βρίσκονται τα πλήρη UPPAAL μοντέλα για το κάθε παράδειγμα (μαζί με τα queries) και μπορείτε να τα ανοίξετε με το UPPAAL κατεβάζοντάς το από [εδώ](https://uppaal.org/downloads/).
 
 - [lamp.xml](models/lamp.xml)
