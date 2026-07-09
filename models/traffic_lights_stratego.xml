@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+</declaration>
+	<template>
+		<name x="5" y="5">Template</name>
+		<declaration>// Place local declarations here.
+clock x;
+hybrid clock trip; // to use as a stopwatch for trip time</declaration>
+		<location id="id0" x="-323" y="0">
+			<name x="-391" y="0">start</name>
+			<urgent/>
+		</location>
+		<location id="id1" x="-263" y="-76">
+			<name x="-297" y="-119">go_around</name>
+			<label kind="invariant" x="-273" y="-59">x&lt;=25</label>
+		</location>
+		<location id="id2" x="-263" y="68">
+			<name x="-306" y="93">go_through</name>
+			<urgent/>
+		</location>
+		<location id="id3" x="76" y="-8">
+			<name x="102" y="-17">goal</name>
+			<label kind="invariant" x="76" y="-51">trip'==0</label>
+		</location>
+		<location id="id4" x="-127" y="34">
+			<name x="-178" y="0">green</name>
+			<label kind="invariant" x="-127" y="42">x&lt;=10</label>
+		</location>
+		<location id="id5" x="-127" y="119">
+			<name x="-136" y="85">red</name>
+			<label kind="invariant" x="-153" y="136">x&lt;=60</label>
+		</location>
+		<branchpoint id="id6" x="-195" y="68"/>
+		<init ref="id0"/>
+		<transition id="id7" controllable="false">
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-119" y="-102">x&gt;=20</label>
+			<nail x="-255" y="-76"/>
+			<nail x="25" y="-76"/>
+		</transition>
+		<transition id="id8" controllable="false">
+			<source ref="id5"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-25" y="127">x&gt;=15</label>
+			<nail x="25" y="119"/>
+		</transition>
+		<transition id="id9" controllable="false">
+			<source ref="id4"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-75" y="-42">x&gt;=5</label>
+			<nail x="-93" y="-8"/>
+		</transition>
+		<transition id="id10">
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="probability" x="-195" y="93">1</label>
+		</transition>
+		<transition id="id11">
+			<source ref="id6"/>
+			<target ref="id4"/>
+			<label kind="probability" x="-195" y="34">3</label>
+		</transition>
+		<transition id="id12" controllable="false">
+			<source ref="id2"/>
+			<target ref="id6"/>
+		</transition>
+		<transition id="id13">
+			<source ref="id0"/>
+			<target ref="id2"/>
+		</transition>
+		<transition id="id14">
+			<source ref="id0"/>
+			<target ref="id1"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Process = Template();
+// List one or more processes to be composed into a system.
+system Process;
+</system>
+	<queries>
+		<query>
+			<formula>A&lt;&gt; Process.goal</formula>
+			<comment>can we reach goal state for all executions</comment>
+			<result outcome="success" type="quality" timestamp="2026-06-25 10:49:44 +0300">
+			</result>
+		</query>
+		<query>
+			<formula>Pr[&lt;=30](&lt;&gt; Process.goal)</formula>
+			<comment/>
+			<result outcome="success" type="quantity" value="0.900704 ± 0.0433763 (95% CI)" timestamp="2026-07-09 19:53:49 +0300">
+				<details>0.900704 ± 0.0433763 (95% CI)</details>
+				<plot title="Probability Density Distribution" xaxis="run duration in time" yaxis="probability density">
+					<series title="density" type="b(1.741598)" color="0x0000ff" encoding="csv">5.024770727613941,0.076952679910268
+6.766368534382699,0.059194369161744614
+8.507966341151457,0.0680735245360063
+10.249564147920216,0.0
+11.991161954688973,0.0
+13.732759761457732,0.0
+15.474357568226491,0.0
+17.215955374995247,0.0
+18.957553181764006,0.029597184580872307
+20.699150988532764,0.10654986449114032
+22.440748795301523,0.1243081752396637
+24.182346602070282,0.050315213787482924
+25.92394440883904,0.002959718458087231
+27.6655422156078,0.002959718458087231
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.745237962611352,0.0
+16.745237962611352,0.12430817523966368
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=1.7416, bucket count=14
+Runs: 194 in total, 176 (90.722%) displayed, 18 (9.2784%) remaining
+Span of displayed sample: [5.025, 29.41]
+Mean estimate of displayed sample: 16.75 ± 1.126 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Density Confidence Intervals" xaxis="run duration in time" yaxis="probability density">
+					<series title="upper limit" type="b(1.741598)" color="0xa0a0ff" encoding="csv">5.024770727613941,0.19017493225408105
+6.766368534382699,0.15472278178479665
+8.507966341151457,0.17256748651026915
+10.249564147920216,0.018835200849895997
+11.991161954688973,0.018835200849895997
+13.732759761457732,0.018835200849895997
+15.474357568226491,0.018835200849895997
+17.215955374995247,0.018835200849895997
+18.957553181764006,0.09275068143096805
+20.699150988532764,0.24752728814940947
+22.440748795301523,0.28115839570497025
+24.182346602070282,0.1365947150528954
+25.92394440883904,0.028383692041531666
+27.6655422156078,0.028383692041531666
+					</series>
+					<series title="lower limit" type="b(1.741598)" color="0x0000ff" encoding="csv">5.024770727613941,0.08945011851529967
+6.766368534382699,0.06411757501040094
+8.507966341151457,0.07665892424843998
+10.249564147920216,0.0
+11.991161954688973,0.0
+13.732759761457732,0.0
+15.474357568226491,0.0
+17.215955374995247,0.0
+18.957553181764006,0.024992052403242624
+20.699150988532764,0.13348306597353604
+22.440748795301523,0.16070872734656746
+24.182346602070282,0.05187722267675275
+25.92394440883904,1.3049564956938103E-4
+27.6655422156078,1.3049564956938103E-4
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.745237962611352,0.0
+16.745237962611352,0.16143704052235364
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=1.7416, bucket count=14
+Runs: 194 in total, 176 (90.722%) displayed, 18 (9.2784%) remaining
+Span of displayed sample: [5.025, 29.41]
+Mean estimate of displayed sample: 16.75 ± 1.126 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Distribution" xaxis="run duration in time" yaxis="probability">
+					<series title="probability" type="b(1.741598)" color="0x0000ff" encoding="csv">5.024770727613941,0.13402061855670103
+6.766368534382699,0.10309278350515463
+8.507966341151457,0.11855670103092783
+10.249564147920216,0.0
+11.991161954688973,0.0
+13.732759761457732,0.0
+15.474357568226491,0.0
+17.215955374995247,0.0
+18.957553181764006,0.05154639175257732
+20.699150988532764,0.18556701030927836
+22.440748795301523,0.21649484536082475
+24.182346602070282,0.08762886597938144
+25.92394440883904,0.005154639175257732
+27.6655422156078,0.005154639175257732
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.745237962611352,0.0
+16.745237962611352,0.21649484536082475
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=1.7416, bucket count=14
+Runs: 194 in total, 176 (90.722%) displayed, 18 (9.2784%) remaining
+Span of displayed sample: [5.025, 29.41]
+Mean estimate of displayed sample: 16.75 ± 1.126 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Confidence Intervals" xaxis="run duration in time" yaxis="probability">
+					<series title="upper limit" type="b(1.741598)" color="0xa0a0ff" encoding="csv">5.024770727613941,0.19017493225408105
+6.766368534382699,0.15472278178479665
+8.507966341151457,0.17256748651026915
+10.249564147920216,0.018835200849895997
+11.991161954688973,0.018835200849895997
+13.732759761457732,0.018835200849895997
+15.474357568226491,0.018835200849895997
+17.215955374995247,0.018835200849895997
+18.957553181764006,0.09275068143096805
+20.699150988532764,0.24752728814940947
+22.440748795301523,0.28115839570497025
+24.182346602070282,0.1365947150528954
+25.92394440883904,0.028383692041531666
+27.6655422156078,0.028383692041531666
+					</series>
+					<series title="lower limit" type="b(1.741598)" color="0x0000ff" encoding="csv">5.024770727613941,0.08945011851529967
+6.766368534382699,0.06411757501040094
+8.507966341151457,0.07665892424843998
+10.249564147920216,0.0
+11.991161954688973,0.0
+13.732759761457732,0.0
+15.474357568226491,0.0
+17.215955374995247,0.0
+18.957553181764006,0.024992052403242624
+20.699150988532764,0.13348306597353604
+22.440748795301523,0.16070872734656746
+24.182346602070282,0.05187722267675275
+25.92394440883904,1.3049564956938103E-4
+27.6655422156078,1.3049564956938103E-4
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.745237962611352,0.0
+16.745237962611352,0.28115839570497025
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=1.7416, bucket count=14
+Runs: 194 in total, 176 (90.722%) displayed, 18 (9.2784%) remaining
+Span of displayed sample: [5.025, 29.41]
+Mean estimate of displayed sample: 16.75 ± 1.126 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Distribution" xaxis="run duration in time" yaxis="probability">
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">5.024770727613941,0.0
+6.766368534382699,0.13402061855670103
+8.507966341151457,0.23711340206185566
+10.249564147920216,0.3556701030927835
+11.991161954688973,0.3556701030927835
+13.732759761457732,0.3556701030927835
+15.474357568226491,0.3556701030927835
+17.215955374995247,0.3556701030927835
+18.957553181764006,0.3556701030927835
+20.699150988532764,0.4072164948453608
+22.440748795301523,0.5927835051546392
+24.182346602070282,0.8092783505154639
+25.92394440883904,0.8969072164948454
+27.6655422156078,0.9020618556701031
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.745237962611352,0.0
+16.745237962611352,0.9072164948453608
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=1.7416, bucket count=14
+Runs: 194 in total, 176 (90.722%) displayed, 18 (9.2784%) remaining
+Span of displayed sample: [5.025, 29.41]
+Mean estimate of displayed sample: 16.75 ± 1.126 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Confidence Intervals" xaxis="run duration in time" yaxis="probability">
+					<series title="upper limit" type="k" color="0x0000dd" encoding="csv">5.024770727613941,0.018835200849895997
+6.766368534382699,0.19017493225408105
+8.507966341151457,0.3033140474026275
+10.249564147920216,0.42741762962606644
+11.991161954688973,0.42741762962606644
+13.732759761457732,0.42741762962606644
+15.474357568226491,0.42741762962606644
+17.215955374995247,0.42741762962606644
+18.957553181764006,0.42741762962606644
+20.699150988532764,0.47991113305373034
+22.440748795301523,0.6625974835154991
+24.182346602070282,0.8620162161918622
+25.92394440883904,0.9358824249895991
+27.6655422156078,0.9399990704354049
+					</series>
+					<series title="lower limit" type="k" color="0xdd0000" encoding="csv">5.024770727613941,0.0
+6.766368534382699,0.08945011851529967
+8.507966341151457,0.17913094764175516
+10.249564147920216,0.2884088696118664
+11.991161954688973,0.2884088696118664
+13.732759761457732,0.2884088696118664
+15.474357568226491,0.2884088696118664
+17.215955374995247,0.2884088696118664
+18.957553181764006,0.2884088696118664
+20.699150988532764,0.33740251648450087
+22.440748795301523,0.5200888669462697
+24.182346602070282,0.7468316390509991
+25.92394440883904,0.8452772182152034
+27.6655422156078,0.8512856637016408
+					</series>
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">5.024770727613941,0.0
+6.766368534382699,0.13402061855670103
+8.507966341151457,0.23711340206185566
+10.249564147920216,0.3556701030927835
+11.991161954688973,0.3556701030927835
+13.732759761457732,0.3556701030927835
+15.474357568226491,0.3556701030927835
+17.215955374995247,0.3556701030927835
+18.957553181764006,0.3556701030927835
+20.699150988532764,0.4072164948453608
+22.440748795301523,0.5927835051546392
+24.182346602070282,0.8092783505154639
+25.92394440883904,0.8969072164948454
+27.6655422156078,0.9020618556701031
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.745237962611352,0.0
+16.745237962611352,0.9072164948453608
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=1.7416, bucket count=14
+Runs: 194 in total, 176 (90.722%) displayed, 18 (9.2784%) remaining
+Span of displayed sample: [5.025, 29.41]
+Mean estimate of displayed sample: 16.75 ± 1.126 (95% CI)</comment>
+				</plot>
+				<plot title="Frequency Histogram" xaxis="run duration in time" yaxis="count">
+					<series title="count" type="b(1.741598)" color="0x0000ff" encoding="csv">5.024770727613941,26.0
+6.766368534382699,20.0
+8.507966341151457,23.0
+10.249564147920216,0.0
+11.991161954688973,0.0
+13.732759761457732,0.0
+15.474357568226491,0.0
+17.215955374995247,0.0
+18.957553181764006,10.0
+20.699150988532764,36.0
+22.440748795301523,42.0
+24.182346602070282,17.0
+25.92394440883904,1.0
+27.6655422156078,1.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.745237962611352,0.0
+16.745237962611352,42.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=1.7416, bucket count=14
+Runs: 194 in total, 176 (90.722%) displayed, 18 (9.2784%) remaining
+Span of displayed sample: [5.025, 29.41]
+Mean estimate of displayed sample: 16.75 ± 1.126 (95% CI)</comment>
+				</plot>
+			</result>
+		</query>
+		<query>
+			<formula>Pr[&lt;=50](&lt;&gt; Process.goal)</formula>
+			<comment/>
+			<result outcome="success" type="quantity" value="0.963944 ± 0.033649 (95% CI)" timestamp="2026-06-25 10:49:44 +0300">
+				<details>0.963944 ± 0.033649 (95% CI)</details>
+				<plot title="Probability Density Distribution" xaxis="run duration in time" yaxis="probability density">
+					<series title="density" type="b(4.102998)" color="0x0000ff" encoding="csv">5.125626424560323,0.08687200360230786
+9.22862426948268,0.021718000900576965
+13.331622114405038,0.0
+17.434619959327396,0.04102289058997871
+21.537617804249752,0.07963266996878221
+25.64061564917211,0.0024131112111752183
+29.74361349409447,0.0
+33.846611339016825,0.0024131112111752183
+37.94960918393918,0.0
+42.05260702886154,0.0048262224223504365
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.433612384287773,0.0
+16.433612384287773,0.08687200360230786
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=4.103, bucket count=10
+Runs: 101 in total, 99 (98.02%) displayed, 2 (1.9802%) remaining
+Span of displayed sample: [5.126, 46.16]
+Mean estimate of displayed sample: 16.43 ± 1.781 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Density Confidence Intervals" xaxis="run duration in time" yaxis="probability density">
+					<series title="upper limit" type="b(4.102998)" color="0xa0a0ff" encoding="csv">5.125626424560323,0.45792459641690747
+9.22862426948268,0.1624256090480684
+13.331622114405038,0.035864620390003724
+17.434619959327396,0.25575785202089785
+21.537617804249752,0.42723683435720844
+25.64061564917211,0.05393234742679571
+29.74361349409447,0.035864620390003724
+33.846611339016825,0.05393234742679571
+37.94960918393918,0.035864620390003724
+42.05260702886154,0.06970508979492442
+					</series>
+					<series title="lower limit" type="b(4.102998)" color="0x0000ff" encoding="csv">5.125626424560323,0.26360736486568176
+9.22862426948268,0.04155947027920031
+13.331622114405038,0.0
+17.434619959327396,0.10121839375620767
+21.537617804249752,0.23669440521507118
+25.64061564917211,2.506399507392151E-4
+29.74361349409447,0.0
+33.846611339016825,2.506399507392151E-4
+37.94960918393918,0.0
+42.05260702886154,0.00240717290925799
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.433612384287773,0.0
+16.433612384287773,0.1116073207261392
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=4.103, bucket count=10
+Runs: 101 in total, 99 (98.02%) displayed, 2 (1.9802%) remaining
+Span of displayed sample: [5.126, 46.16]
+Mean estimate of displayed sample: 16.43 ± 1.781 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Distribution" xaxis="run duration in time" yaxis="probability">
+					<series title="probability" type="b(4.102998)" color="0x0000ff" encoding="csv">5.125626424560323,0.3564356435643564
+9.22862426948268,0.0891089108910891
+13.331622114405038,0.0
+17.434619959327396,0.16831683168316833
+21.537617804249752,0.32673267326732675
+25.64061564917211,0.009900990099009901
+29.74361349409447,0.0
+33.846611339016825,0.009900990099009901
+37.94960918393918,0.0
+42.05260702886154,0.019801980198019802
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.433612384287773,0.0
+16.433612384287773,0.3564356435643564
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=4.103, bucket count=10
+Runs: 101 in total, 99 (98.02%) displayed, 2 (1.9802%) remaining
+Span of displayed sample: [5.126, 46.16]
+Mean estimate of displayed sample: 16.43 ± 1.781 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Confidence Intervals" xaxis="run duration in time" yaxis="probability">
+					<series title="upper limit" type="b(4.102998)" color="0xa0a0ff" encoding="csv">5.125626424560323,0.45792459641690747
+9.22862426948268,0.1624256090480684
+13.331622114405038,0.035864620390003724
+17.434619959327396,0.25575785202089785
+21.537617804249752,0.42723683435720844
+25.64061564917211,0.05393234742679571
+29.74361349409447,0.035864620390003724
+33.846611339016825,0.05393234742679571
+37.94960918393918,0.035864620390003724
+42.05260702886154,0.06970508979492442
+					</series>
+					<series title="lower limit" type="b(4.102998)" color="0x0000ff" encoding="csv">5.125626424560323,0.26360736486568176
+9.22862426948268,0.04155947027920031
+13.331622114405038,0.0
+17.434619959327396,0.10121839375620767
+21.537617804249752,0.23669440521507118
+25.64061564917211,2.506399507392151E-4
+29.74361349409447,0.0
+33.846611339016825,2.506399507392151E-4
+37.94960918393918,0.0
+42.05260702886154,0.00240717290925799
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.433612384287773,0.0
+16.433612384287773,0.45792459641690747
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=4.103, bucket count=10
+Runs: 101 in total, 99 (98.02%) displayed, 2 (1.9802%) remaining
+Span of displayed sample: [5.126, 46.16]
+Mean estimate of displayed sample: 16.43 ± 1.781 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Distribution" xaxis="run duration in time" yaxis="probability">
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">5.125626424560323,0.0
+9.22862426948268,0.3564356435643564
+13.331622114405038,0.44554455445544555
+17.434619959327396,0.44554455445544555
+21.537617804249752,0.6138613861386139
+25.64061564917211,0.9405940594059405
+29.74361349409447,0.9504950495049505
+33.846611339016825,0.9504950495049505
+37.94960918393918,0.9603960396039604
+42.05260702886154,0.9603960396039604
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.433612384287773,0.0
+16.433612384287773,0.9801980198019802
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=4.103, bucket count=10
+Runs: 101 in total, 99 (98.02%) displayed, 2 (1.9802%) remaining
+Span of displayed sample: [5.126, 46.16]
+Mean estimate of displayed sample: 16.43 ± 1.781 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Confidence Intervals" xaxis="run duration in time" yaxis="probability">
+					<series title="upper limit" type="k" color="0x0000dd" encoding="csv">5.125626424560323,0.035864620390003724
+9.22862426948268,0.45792459641690747
+13.331622114405038,0.5477807813438309
+17.434619959327396,0.5477807813438309
+21.537617804249752,0.7090945431680535
+25.64061564917211,0.977889427590582
+29.74361349409447,0.9837327848893618
+33.846611339016825,0.9837327848893618
+37.94960918393918,0.9891055162831897
+42.05260702886154,0.9891055162831897
+					</series>
+					<series title="lower limit" type="k" color="0xdd0000" encoding="csv">5.125626424560323,0.0
+9.22862426948268,0.26360736486568176
+13.331622114405038,0.34658617517805995
+17.434619959327396,0.34658617517805995
+21.537617804249752,0.5117661745970901
+25.64061564917211,0.8751735633556668
+29.74361349409447,0.8882449413653339
+33.846611339016825,0.8882449413653339
+37.94960918393918,0.9016949813799406
+42.05260702886154,0.9016949813799406
+					</series>
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">5.125626424560323,0.0
+9.22862426948268,0.3564356435643564
+13.331622114405038,0.44554455445544555
+17.434619959327396,0.44554455445544555
+21.537617804249752,0.6138613861386139
+25.64061564917211,0.9405940594059405
+29.74361349409447,0.9504950495049505
+33.846611339016825,0.9504950495049505
+37.94960918393918,0.9603960396039604
+42.05260702886154,0.9603960396039604
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.433612384287773,0.0
+16.433612384287773,0.9801980198019802
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=4.103, bucket count=10
+Runs: 101 in total, 99 (98.02%) displayed, 2 (1.9802%) remaining
+Span of displayed sample: [5.126, 46.16]
+Mean estimate of displayed sample: 16.43 ± 1.781 (95% CI)</comment>
+				</plot>
+				<plot title="Frequency Histogram" xaxis="run duration in time" yaxis="count">
+					<series title="count" type="b(4.102998)" color="0x0000ff" encoding="csv">5.125626424560323,36.0
+9.22862426948268,9.0
+13.331622114405038,0.0
+17.434619959327396,17.0
+21.537617804249752,33.0
+25.64061564917211,1.0
+29.74361349409447,0.0
+33.846611339016825,1.0
+37.94960918393918,0.0
+42.05260702886154,2.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">16.433612384287773,0.0
+16.433612384287773,36.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=4.103, bucket count=10
+Runs: 101 in total, 99 (98.02%) displayed, 2 (1.9802%) remaining
+Span of displayed sample: [5.126, 46.16]
+Mean estimate of displayed sample: 16.43 ± 1.781 (95% CI)</comment>
+				</plot>
+			</result>
+		</query>
+		<query>
+			<formula>E[&lt;=100;500](max: Process.x)</formula>
+			<comment>this will result in 100 always since x keeps increasing and we asked for the maximal value of cost expression over 100 time units of stochastic simulation
+what we need is a hybrid clock to use as a stopwatch</comment>
+			<result outcome="success" type="quantity" value="≈ 100" timestamp="2026-06-25 10:49:44 +0300">
+				<details>≈ 100</details>
+				<plot title="Probability Density Distribution" xaxis="max: Process.x" yaxis="probability density">
+					<series title="density" type="b(0.000000)" color="0x0000ff" encoding="csv">100.0,4.503599627370496E15
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">100.0,0.0
+100.0,4.503599627370496E15
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.2204e-16, bucket count=1
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [100, 100]
+Mean estimate of displayed sample: ≈ 100</comment>
+				</plot>
+				<plot title="Probability Distribution" xaxis="max: Process.x" yaxis="probability">
+					<series title="probability" type="b(0.000000)" color="0x0000ff" encoding="csv">100.0,1.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">100.0,0.0
+100.0,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.2204e-16, bucket count=1
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [100, 100]
+Mean estimate of displayed sample: ≈ 100</comment>
+				</plot>
+				<plot title="Cumulative Probability Distribution" xaxis="max: Process.x" yaxis="probability">
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">100.0,0.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">100.0,0.0
+100.0,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.2204e-16, bucket count=1
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [100, 100]
+Mean estimate of displayed sample: ≈ 100</comment>
+				</plot>
+				<plot title="Cumulative Probability Confidence Intervals" xaxis="max: Process.x" yaxis="probability">
+					<series title="upper limit" type="k" color="0x0000dd" encoding="csv">100.0,0.007350610051907787
+					</series>
+					<series title="lower limit" type="k" color="0xdd0000" encoding="csv">100.0,0.0
+					</series>
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">100.0,0.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">100.0,0.0
+100.0,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.2204e-16, bucket count=1
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [100, 100]
+Mean estimate of displayed sample: ≈ 100</comment>
+				</plot>
+				<plot title="Frequency Histogram" xaxis="max: Process.x" yaxis="count">
+					<series title="count" type="b(0.000000)" color="0x0000ff" encoding="csv">100.0,500.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">100.0,0.0
+100.0,500.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.2204e-16, bucket count=1
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [100, 100]
+Mean estimate of displayed sample: ≈ 100</comment>
+				</plot>
+			</result>
+		</query>
+		<query>
+			<formula>E[&lt;=100;500](max: Process.trip)</formula>
+			<comment/>
+			<result outcome="success" type="quantity" value="19.2327 ± 0.984852 (95% CI)" timestamp="2026-06-25 10:49:44 +0300">
+				<details>19.2327 ± 0.984852 (95% CI)</details>
+				<plot title="Probability Density Distribution" xaxis="max: Process.trip" yaxis="probability density">
+					<series title="density" type="b(2.376416)" color="0x0000ff" encoding="csv">5.007278750417754,0.06648666501334044
+7.383695133587184,0.07658590526853139
+9.760111516756615,0.008416033545992461
+12.136527899926044,0.0
+14.512944283095475,0.002524810063797738
+16.889360666264906,0.002524810063797738
+19.265777049434334,0.06732826836793969
+21.642193432603765,0.10856683274330274
+24.018609815773196,0.04712978785755778
+26.395026198942627,8.41603354599246E-4
+28.77144258211206,0.006732826836793968
+31.147858965281486,8.41603354599246E-4
+33.524275348450914,0.003366413418396984
+35.90069173162035,0.003366413418396984
+38.277108114789776,0.001683206709198492
+40.65352449795921,0.004208016772996231
+43.02994088112864,8.41603354599246E-4
+45.406357264298066,0.004208016772996231
+47.7827736474675,0.001683206709198492
+50.15919003063693,0.003366413418396984
+52.53560641380636,8.41603354599246E-4
+54.91202279697579,0.004208016772996231
+57.28843918014522,0.005049620127595476
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">19.232718881424518,0.0
+19.232718881424518,0.10856683274330275
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.3764, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [5.007, 59.66]
+Mean estimate of displayed sample: 19.23 ± 0.9849 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Distribution" xaxis="max: Process.trip" yaxis="probability">
+					<series title="probability" type="b(2.376416)" color="0x0000ff" encoding="csv">5.007278750417754,0.158
+7.383695133587184,0.182
+9.760111516756615,0.02
+12.136527899926044,0.0
+14.512944283095475,0.006
+16.889360666264906,0.006
+19.265777049434334,0.16
+21.642193432603765,0.258
+24.018609815773196,0.112
+26.395026198942627,0.002
+28.77144258211206,0.016
+31.147858965281486,0.002
+33.524275348450914,0.008
+35.90069173162035,0.008
+38.277108114789776,0.004
+40.65352449795921,0.01
+43.02994088112864,0.002
+45.406357264298066,0.01
+47.7827736474675,0.004
+50.15919003063693,0.008
+52.53560641380636,0.002
+54.91202279697579,0.01
+57.28843918014522,0.012
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">19.232718881424518,0.0
+19.232718881424518,0.258
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.3764, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [5.007, 59.66]
+Mean estimate of displayed sample: 19.23 ± 0.9849 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Distribution" xaxis="max: Process.trip" yaxis="probability">
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">5.007278750417754,0.0
+7.383695133587184,0.158
+9.760111516756615,0.34
+12.136527899926044,0.36
+14.512944283095475,0.36
+16.889360666264906,0.366
+19.265777049434334,0.372
+21.642193432603765,0.532
+24.018609815773196,0.79
+26.395026198942627,0.902
+28.77144258211206,0.904
+31.147858965281486,0.92
+33.524275348450914,0.922
+35.90069173162035,0.93
+38.277108114789776,0.938
+40.65352449795921,0.942
+43.02994088112864,0.952
+45.406357264298066,0.954
+47.7827736474675,0.964
+50.15919003063693,0.968
+52.53560641380636,0.976
+54.91202279697579,0.978
+57.28843918014522,0.988
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">19.232718881424518,0.0
+19.232718881424518,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.3764, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [5.007, 59.66]
+Mean estimate of displayed sample: 19.23 ± 0.9849 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Confidence Intervals" xaxis="max: Process.trip" yaxis="probability">
+					<series title="upper limit" type="k" color="0x0000dd" encoding="csv">5.007278750417754,0.007350610051907787
+7.383695133587184,0.19297795703141915
+9.760111516756615,0.3833742369808543
+12.136527899926044,0.4038034458716671
+14.512944283095475,0.4038034458716671
+16.889360666264906,0.409916726135174
+19.265777049434334,0.4160229977417723
+21.642193432603765,0.5764348012809414
+24.018609815773196,0.82489777470715
+26.395026198942627,0.9266174143922598
+28.77144258211206,0.9283673060246592
+31.147858965281486,0.9422338800711657
+33.524275348450914,0.9439488262244397
+35.90069173162035,0.9507613552796212
+38.277108114789776,0.9574889387036145
+40.65352449795921,0.9608161312028122
+43.02994088112864,0.9690068312064947
+45.406357264298066,0.9706198246075972
+47.7827736474675,0.9785271434139067
+50.15919003063693,0.9816008146763601
+52.53560641380636,0.9875387609404443
+54.91202279697579,0.9889677236387425
+57.28843918014522,0.9955838277141984
+					</series>
+					<series title="lower limit" type="k" color="0xdd0000" encoding="csv">5.007278750417754,0.0
+7.383695133587184,0.1271307419362821
+9.760111516756615,0.29853097043299753
+12.136527899926044,0.31786295462370395
+14.512944283095475,0.31786295462370395
+16.889360666264906,0.32367808937253933
+19.265777049434334,0.3295002563949794
+21.642193432603765,0.4871847369022257
+24.018609815773196,0.7516321895128466
+26.395026198942627,0.8725114573141097
+28.77144258211206,0.8747352534366691
+31.147858965281486,0.8926545356436476
+33.524275348450914,0.8949122735699343
+35.90069173162035,0.9039889084073668
+38.277108114789776,0.9131474025208987
+40.65352449795921,0.9177617791061647
+43.02994088112864,0.9294192037426702
+45.406357264298066,0.9317745721187621
+47.7827736474675,0.9436998237982089
+50.15919003063693,0.9485532317083544
+52.53560641380636,0.9584523812003137
+54.91202279697579,0.9609774491551912
+57.28843918014522,0.974065072734663
+					</series>
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">5.007278750417754,0.0
+7.383695133587184,0.158
+9.760111516756615,0.34
+12.136527899926044,0.36
+14.512944283095475,0.36
+16.889360666264906,0.366
+19.265777049434334,0.372
+21.642193432603765,0.532
+24.018609815773196,0.79
+26.395026198942627,0.902
+28.77144258211206,0.904
+31.147858965281486,0.92
+33.524275348450914,0.922
+35.90069173162035,0.93
+38.277108114789776,0.938
+40.65352449795921,0.942
+43.02994088112864,0.952
+45.406357264298066,0.954
+47.7827736474675,0.964
+50.15919003063693,0.968
+52.53560641380636,0.976
+54.91202279697579,0.978
+57.28843918014522,0.988
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">19.232718881424518,0.0
+19.232718881424518,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.3764, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [5.007, 59.66]
+Mean estimate of displayed sample: 19.23 ± 0.9849 (95% CI)</comment>
+				</plot>
+				<plot title="Frequency Histogram" xaxis="max: Process.trip" yaxis="count">
+					<series title="count" type="b(2.376416)" color="0x0000ff" encoding="csv">5.007278750417754,79.0
+7.383695133587184,91.0
+9.760111516756615,10.0
+12.136527899926044,0.0
+14.512944283095475,3.0
+16.889360666264906,3.0
+19.265777049434334,80.0
+21.642193432603765,129.0
+24.018609815773196,56.0
+26.395026198942627,1.0
+28.77144258211206,8.0
+31.147858965281486,1.0
+33.524275348450914,4.0
+35.90069173162035,4.0
+38.277108114789776,2.0
+40.65352449795921,5.0
+43.02994088112864,1.0
+45.406357264298066,5.0
+47.7827736474675,2.0
+50.15919003063693,4.0
+52.53560641380636,1.0
+54.91202279697579,5.0
+57.28843918014522,6.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">19.232718881424518,0.0
+19.232718881424518,129.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=2.3764, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [5.007, 59.66]
+Mean estimate of displayed sample: 19.23 ± 0.9849 (95% CI)</comment>
+				</plot>
+			</result>
+		</query>
+		<query>
+			<formula>// STRATEGO</formula>
+			<comment/>
+		</query>
+		<query>
+			<formula>strategy Fastest = minE(Process.trip) [&lt;=100] : &lt;&gt; Process.goal</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-07-09 20:01:52 +0300">
+			</result>
+		</query>
+		<query>
+			<formula>Pr[&lt;=30](&lt;&gt; Process.goal) under Fastest</formula>
+			<comment/>
+			<result outcome="success" type="interval" value="≥ 0.950056 (95% CI)" timestamp="2026-07-09 20:01:52 +0300">
+				<details>≥ 0.950056 (95% CI)</details>
+				<plot title="Probability Density Distribution" xaxis="run duration in time" yaxis="probability density">
+					<series title="density" type="b(0.530508)" color="0x0000ff" encoding="csv">20.048568537458777,0.28798413291009267
+20.579076160340467,0.18326263003369533
+21.109583783222156,0.157082254314596
+21.640091406103846,0.10472150287639732
+22.170599028985535,0.20944300575279465
+22.701106651867224,0.18326263003369533
+23.231614274748914,0.18326263003369533
+23.762121897630603,0.28798413291009267
+24.292629520512293,0.28798413291009267
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.579246350376508,0.0
+22.579246350376508,0.28798413291009267
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.53051, bucket count=9
+Runs: 72 in total, 72 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.049, 24.823]
+Mean estimate of displayed sample: 22.579 ± 0.35436 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Density Confidence Intervals" xaxis="run duration in time" yaxis="probability density">
+					<series title="upper limit" type="b(0.530508)" color="0xa0a0ff" encoding="csv">20.048568537458777,0.2569401232482781
+20.579076160340467,0.19011034044555922
+21.109583783222156,0.172608584683674
+21.640091406103846,0.13617864931292403
+22.170599028985535,0.20724687066674882
+22.701106651867224,0.19011034044555922
+23.231614274748914,0.19011034044555922
+23.762121897630603,0.2569401232482781
+24.292629520512293,0.2569401232482781
+					</series>
+					<series title="lower limit" type="b(0.530508)" color="0x0000ff" encoding="csv">20.048568537458777,0.07881196318794174
+20.579076160340467,0.039989500933602505
+21.109583783222156,0.031197509141384482
+21.640091406103846,0.015342537111130598
+22.170599028985535,0.04920803927064098
+22.701106651867224,0.039989500933602505
+23.231614274748914,0.039989500933602505
+23.762121897630603,0.07881196318794174
+24.292629520512293,0.07881196318794174
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.579246350376508,0.0
+22.579246350376508,0.48432880540451584
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.53051, bucket count=9
+Runs: 72 in total, 72 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.049, 24.823]
+Mean estimate of displayed sample: 22.579 ± 0.35436 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Distribution" xaxis="run duration in time" yaxis="probability">
+					<series title="probability" type="b(0.530508)" color="0x0000ff" encoding="csv">20.048568537458777,0.1527777777777778
+20.579076160340467,0.09722222222222222
+21.109583783222156,0.08333333333333333
+21.640091406103846,0.05555555555555555
+22.170599028985535,0.1111111111111111
+22.701106651867224,0.09722222222222222
+23.231614274748914,0.09722222222222222
+23.762121897630603,0.1527777777777778
+24.292629520512293,0.1527777777777778
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.579246350376508,0.0
+22.579246350376508,0.1527777777777778
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.53051, bucket count=9
+Runs: 72 in total, 72 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.049, 24.823]
+Mean estimate of displayed sample: 22.579 ± 0.35436 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Confidence Intervals" xaxis="run duration in time" yaxis="probability">
+					<series title="upper limit" type="b(0.530508)" color="0xa0a0ff" encoding="csv">20.048568537458777,0.2569401232482781
+20.579076160340467,0.19011034044555922
+21.109583783222156,0.172608584683674
+21.640091406103846,0.13617864931292403
+22.170599028985535,0.20724687066674882
+22.701106651867224,0.19011034044555922
+23.231614274748914,0.19011034044555922
+23.762121897630603,0.2569401232482781
+24.292629520512293,0.2569401232482781
+					</series>
+					<series title="lower limit" type="b(0.530508)" color="0x0000ff" encoding="csv">20.048568537458777,0.07881196318794174
+20.579076160340467,0.039989500933602505
+21.109583783222156,0.031197509141384482
+21.640091406103846,0.015342537111130598
+22.170599028985535,0.04920803927064098
+22.701106651867224,0.039989500933602505
+23.231614274748914,0.039989500933602505
+23.762121897630603,0.07881196318794174
+24.292629520512293,0.07881196318794174
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.579246350376508,0.0
+22.579246350376508,0.2569401232482781
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.53051, bucket count=9
+Runs: 72 in total, 72 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.049, 24.823]
+Mean estimate of displayed sample: 22.579 ± 0.35436 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Distribution" xaxis="run duration in time" yaxis="probability">
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">20.048568537458777,0.0
+20.579076160340467,0.1527777777777778
+21.109583783222156,0.25
+21.640091406103846,0.3333333333333333
+22.170599028985535,0.3888888888888889
+22.701106651867224,0.5
+23.231614274748914,0.5972222222222222
+23.762121897630603,0.6944444444444444
+24.292629520512293,0.8472222222222222
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.579246350376508,0.0
+22.579246350376508,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.53051, bucket count=9
+Runs: 72 in total, 72 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.049, 24.823]
+Mean estimate of displayed sample: 22.579 ± 0.35436 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Confidence Intervals" xaxis="run duration in time" yaxis="probability">
+					<series title="upper limit" type="k" color="0x0000dd" encoding="csv">20.048568537458777,0.04994408370585468
+20.579076160340467,0.2569401232482781
+21.109583783222156,0.3660280721379009
+21.640091406103846,0.4542961110255666
+22.170599028985535,0.5110630637723108
+22.701106651867224,0.6202428838819517
+23.231614274748914,0.7112079862392012
+23.762121897630603,0.7976201305699325
+24.292629520512293,0.9211880368120583
+					</series>
+					<series title="lower limit" type="k" color="0xdd0000" encoding="csv">20.048568537458777,0.0
+20.579076160340467,0.07881196318794174
+21.109583783222156,0.15539265735437505
+21.640091406103846,0.22656342448818495
+22.170599028985535,0.2761546858474555
+22.701106651867224,0.3797571161180483
+23.231614274748914,0.47497988455265755
+23.762121897630603,0.5746833466855246
+24.292629520512293,0.7430598767517219
+					</series>
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">20.048568537458777,0.0
+20.579076160340467,0.1527777777777778
+21.109583783222156,0.25
+21.640091406103846,0.3333333333333333
+22.170599028985535,0.3888888888888889
+22.701106651867224,0.5
+23.231614274748914,0.5972222222222222
+23.762121897630603,0.6944444444444444
+24.292629520512293,0.8472222222222222
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.579246350376508,0.0
+22.579246350376508,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.53051, bucket count=9
+Runs: 72 in total, 72 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.049, 24.823]
+Mean estimate of displayed sample: 22.579 ± 0.35436 (95% CI)</comment>
+				</plot>
+				<plot title="Frequency Histogram" xaxis="run duration in time" yaxis="count">
+					<series title="count" type="b(0.530508)" color="0x0000ff" encoding="csv">20.048568537458777,11.0
+20.579076160340467,7.0
+21.109583783222156,6.0
+21.640091406103846,4.0
+22.170599028985535,8.0
+22.701106651867224,7.0
+23.231614274748914,7.0
+23.762121897630603,11.0
+24.292629520512293,11.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.579246350376508,0.0
+22.579246350376508,11.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.53051, bucket count=9
+Runs: 72 in total, 72 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.049, 24.823]
+Mean estimate of displayed sample: 22.579 ± 0.35436 (95% CI)</comment>
+				</plot>
+			</result>
+		</query>
+		<query>
+			<formula>E[&lt;=100;500](max: Process.trip) under Fastest</formula>
+			<comment/>
+			<result outcome="success" type="quantity" value="22.3833 ± 0.12556 (95% CI)" timestamp="2026-07-09 20:01:52 +0300">
+				<details>22.3833 ± 0.12556 (95% CI)</details>
+				<plot title="Probability Density Distribution" xaxis="max: Process.trip" yaxis="probability density">
+					<series title="density" type="b(0.216826)" color="0x0000ff" encoding="csv">20.006636827019975,0.2305993207083111
+20.223463137897298,0.1937034293949813
+20.44028944877462,0.15680753808165154
+20.657115759651948,0.24904726636497598
+20.87394207052927,0.20292740222331376
+21.090768381406594,0.2582712391933084
+21.307594692283917,0.21215137505164622
+21.524421003161244,0.20292740222331376
+21.741247314038567,0.28594315767830575
+21.95807362491589,0.18447945656664888
+22.174899935793214,0.2582712391933084
+22.39172624667054,0.21215137505164622
+22.608552557547863,0.20292740222331376
+22.825378868425187,0.20292740222331376
+23.04220517930251,0.1475835652533191
+23.259031490179837,0.22137534787997865
+23.47585780105716,0.13835959242498666
+23.692684111934483,0.166031510909984
+23.909510422811806,0.166031510909984
+24.12633673368913,0.15680753808165154
+24.343163044566456,0.1475835652533191
+24.55998935544378,0.20292740222331376
+24.776815666321102,0.21215137505164622
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.38325903086923,0.0
+22.38325903086923,0.28594315767830575
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.21683, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.007, 24.994]
+Mean estimate of displayed sample: 22.383 ± 0.12556 (95% CI)</comment>
+				</plot>
+				<plot title="Probability Distribution" xaxis="max: Process.trip" yaxis="probability">
+					<series title="probability" type="b(0.216826)" color="0x0000ff" encoding="csv">20.006636827019975,0.05
+20.223463137897298,0.042
+20.44028944877462,0.034
+20.657115759651948,0.054
+20.87394207052927,0.044
+21.090768381406594,0.056
+21.307594692283917,0.046
+21.524421003161244,0.044
+21.741247314038567,0.062
+21.95807362491589,0.04
+22.174899935793214,0.056
+22.39172624667054,0.046
+22.608552557547863,0.044
+22.825378868425187,0.044
+23.04220517930251,0.032
+23.259031490179837,0.048
+23.47585780105716,0.03
+23.692684111934483,0.036
+23.909510422811806,0.036
+24.12633673368913,0.034
+24.343163044566456,0.032
+24.55998935544378,0.044
+24.776815666321102,0.046
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.38325903086923,0.0
+22.38325903086923,0.062
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.21683, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.007, 24.994]
+Mean estimate of displayed sample: 22.383 ± 0.12556 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Distribution" xaxis="max: Process.trip" yaxis="probability">
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">20.006636827019975,0.0
+20.223463137897298,0.05
+20.44028944877462,0.092
+20.657115759651948,0.126
+20.87394207052927,0.18
+21.090768381406594,0.224
+21.307594692283917,0.28
+21.524421003161244,0.326
+21.741247314038567,0.37
+21.95807362491589,0.432
+22.174899935793214,0.472
+22.39172624667054,0.528
+22.608552557547863,0.574
+22.825378868425187,0.618
+23.04220517930251,0.662
+23.259031490179837,0.694
+23.47585780105716,0.742
+23.692684111934483,0.772
+23.909510422811806,0.808
+24.12633673368913,0.844
+24.343163044566456,0.878
+24.55998935544378,0.91
+24.776815666321102,0.954
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.38325903086923,0.0
+22.38325903086923,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.21683, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.007, 24.994]
+Mean estimate of displayed sample: 22.383 ± 0.12556 (95% CI)</comment>
+				</plot>
+				<plot title="Cumulative Probability Confidence Intervals" xaxis="max: Process.trip" yaxis="probability">
+					<series title="upper limit" type="k" color="0x0000dd" encoding="csv">20.006636827019975,0.007350610051907787
+20.223463137897298,0.07292762165047896
+20.44028944877462,0.12080703261074258
+20.657115759651948,0.15831399429900553
+20.87394207052927,0.21653636943708096
+21.090768381406594,0.2631206832433213
+21.307594692283917,0.32157906673065645
+21.524421003161244,0.3690252768581542
+21.741247314038567,0.4139883482110987
+21.95807362491589,0.47671360122330875
+22.174899935793214,0.5168124511393546
+22.39172624667054,0.5724795516338109
+22.608552557547863,0.617794186767857
+22.825378868425187,0.6607806962320383
+23.04220517930251,0.7033977636346208
+23.259031490179837,0.7341426078113891
+23.47585780105716,0.7798231457044343
+23.692684111934483,0.8080734750942906
+23.909510422811806,0.8416170261851486
+24.12633673368913,0.8746925667152281
+24.343163044566456,0.9053811035435845
+24.55998935544378,0.9335959912454309
+24.776815666321102,0.9706198246075972
+					</series>
+					<series title="lower limit" type="k" color="0xdd0000" encoding="csv">20.006636827019975,0.0
+20.223463137897298,0.032615180149330056
+20.44028944877462,0.0681433041566544
+20.657115759651948,0.0981961177847229
+20.87394207052927,0.14730058249929018
+21.090768381406594,0.1881792025007144
+21.307594692283917,0.24104491652216795
+21.524421003161244,0.2850472943400025
+21.741247314038567,0.32755875718147925
+21.95807362491589,0.3880950490657598
+22.174899935793214,0.42752044836618913
+22.39172624667054,0.48318754886064536
+22.608552557547863,0.5293257673533567
+22.825378868425187,0.5738152699606193
+23.04220517930251,0.6186731305968439
+23.259031490179837,0.6515453913226887
+23.47585780105716,0.701288087489448
+23.692684111934483,0.7326751502036191
+23.909510422811806,0.7706932186287031
+24.12633673368913,0.8091738863288441
+24.343163044566456,0.8460579031535461
+24.55998935544378,0.881427078322658
+24.776815666321102,0.9317745721187621
+					</series>
+					<series title="cumulative" type="l" color="0x000000" encoding="csv">20.006636827019975,0.0
+20.223463137897298,0.05
+20.44028944877462,0.092
+20.657115759651948,0.126
+20.87394207052927,0.18
+21.090768381406594,0.224
+21.307594692283917,0.28
+21.524421003161244,0.326
+21.741247314038567,0.37
+21.95807362491589,0.432
+22.174899935793214,0.472
+22.39172624667054,0.528
+22.608552557547863,0.574
+22.825378868425187,0.618
+23.04220517930251,0.662
+23.259031490179837,0.694
+23.47585780105716,0.742
+23.692684111934483,0.772
+23.909510422811806,0.808
+24.12633673368913,0.844
+24.343163044566456,0.878
+24.55998935544378,0.91
+24.776815666321102,0.954
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.38325903086923,0.0
+22.38325903086923,1.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.21683, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.007, 24.994]
+Mean estimate of displayed sample: 22.383 ± 0.12556 (95% CI)</comment>
+				</plot>
+				<plot title="Frequency Histogram" xaxis="max: Process.trip" yaxis="count">
+					<series title="count" type="b(0.216826)" color="0x0000ff" encoding="csv">20.006636827019975,25.0
+20.223463137897298,21.0
+20.44028944877462,17.0
+20.657115759651948,27.0
+20.87394207052927,22.0
+21.090768381406594,28.0
+21.307594692283917,23.0
+21.524421003161244,22.0
+21.741247314038567,31.0
+21.95807362491589,20.0
+22.174899935793214,28.0
+22.39172624667054,23.0
+22.608552557547863,22.0
+22.825378868425187,22.0
+23.04220517930251,16.0
+23.259031490179837,24.0
+23.47585780105716,15.0
+23.692684111934483,18.0
+23.909510422811806,18.0
+24.12633673368913,17.0
+24.343163044566456,16.0
+24.55998935544378,22.0
+24.776815666321102,23.0
+					</series>
+					<series title="average" type="pl" color="0x00dd00" encoding="csv">22.38325903086923,0.0
+22.38325903086923,31.0
+					</series>
+					<comment>Parameters: α=0.05, ε=0.05, bucket width=0.21683, bucket count=23
+Runs: 500 in total, 500 (100%) displayed, 0 (0%) remaining
+Span of displayed sample: [20.007, 24.994]
+Mean estimate of displayed sample: 22.383 ± 0.12556 (95% CI)</comment>
+				</plot>
+			</result>
+		</query>
+		<query>
+			<formula>simulate [&lt;=100] {
+  Process.start, 2*Process.go_around, 4*Process.go_through,
+  6*Process.green, 8*Process.red, 10*Process.goal
+} under Fastest</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-07-09 20:01:05 +0300">
+				<plot title="Simulations (1)" xaxis="time" yaxis="value">
+					<series title="Process.start" type="l" color="0xff0000" encoding="csv">0.0,1.0
+0.0,0.0
+100.0,0.0
+					</series>
+					<series title="2 * Process.go_around" type="l" color="0xffff00" encoding="csv">0.0,0.0
+100.0,0.0
+					</series>
+					<series title="4 * Process.go_through" type="l" color="0x00ff00" encoding="csv">0.0,0.0
+0.0,4.0
+0.0,0.0
+100.0,0.0
+					</series>
+					<series title="6 * Process.green" type="l" color="0x00ffff" encoding="csv">0.0,0.0
+100.0,0.0
+					</series>
+					<series title="8 * Process.red" type="l" color="0x0000ff" encoding="csv">0.0,0.0
+0.0,8.0
+22.344983629882336,8.0
+22.344983629882336,0.0
+100.0,0.0
+					</series>
+					<series title="10 * Process.goal" type="l" color="0xff00ff" encoding="csv">0.0,0.0
+22.344983629882336,0.0
+22.344983629882336,10.0
+100.0,10.0
+					</series>
+					<comment/>
+				</plot>
+			</result>
+		</query>
+	</queries>
+</nta>
