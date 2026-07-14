@@ -39,7 +39,7 @@
 > [!tip]
 > Το παρακάτω αυτόματο θα μείνει στο Α το τουλάχιστον 10 και το πολύ 20 χρονικές μονάδες.
 >
-> ![branch](images/templateAB.png)
+> ![invariant and guard example](images/templateAB.png)
 
 Παρακάτω παρουσιάζουμε κάποια queries που εκτελέσαμε για να μελετήσουμε το μοντέλο.
 
