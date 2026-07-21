@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+const int N = 3; // number of devices
+typedef int[0,N-1] device_id;
+
+chan submit[N], complete[N];</declaration>
+	<template>
+		<name x="5" y="5">Device</name>
+		<parameter>const device_id id</parameter>
+		<declaration>// Place local declarations here.
+clock t;</declaration>
+		<location id="id0" x="-450" y="0">
+			<name x="-510" y="0">idle</name>
+			<label kind="invariant" x="-484" y="25">t &lt;= 20</label>
+		</location>
+		<location id="id1" x="-93" y="0">
+			<name x="-144" y="17">generateTask</name>
+		</location>
+		<location id="id2" x="-93" y="-119">
+			<name x="-127" y="-153">waitResult</name>
+		</location>
+		<location id="id3" x="-450" y="-119">
+			<name x="-501" y="-153">done</name>
+		</location>
+		<init ref="id0"/>
+		<transition id="id4">
+			<source ref="id3"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-510" y="-76">t = 0</label>
+		</transition>
+		<transition id="id5">
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-323" y="-153">complete[id]?</label>
+		</transition>
+		<transition id="id6">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-85" y="-76">submit[id]!</label>
+		</transition>
+		<transition id="id7">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-314" y="8">t &gt;= 10</label>
+			<nail x="-433" y="0"/>
+		</transition>
+	</template>
+	<template>
+		<name>Cloud</name>
+		<declaration>device_id current; // current device
+
+clock t;</declaration>
+		<location id="id8" x="-331" y="-25">
+			<name x="-399" y="-42">idle</name>
+		</location>
+		<location id="id9" x="85" y="-25">
+			<name x="110" y="-42">processing</name>
+			<label kind="invariant" x="75" y="-8">t &lt;= 10</label>
+		</location>
+		<init ref="id8"/>
+		<transition id="id10">
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="-212" y="34">complete[current]!</label>
+			<nail x="-51" y="25"/>
+			<nail x="-212" y="25"/>
+		</transition>
+		<transition id="id11">
+			<source ref="id8"/>
+			<target ref="id9"/>
+			<label kind="select" x="-205" y="-127">i : device_id</label>
+			<label kind="synchronisation" x="-196" y="-110">submit[i]?</label>
+			<label kind="assignment" x="-204" y="-85">current = i, t = 0</label>
+			<nail x="-222" y="-85"/>
+			<nail x="-60" y="-85"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+// Process = Template();
+// List one or more processes to be composed into a system.
+system Device, Cloud;
+</system>
+	<queries>
+		<query>
+			<formula>E&lt;&gt; Device(0).done</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-07-20 12:36:13 +0300">
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Device(1).done</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-07-20 12:30:07 +0300">
+			</result>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Device(2).done</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-07-20 12:30:07 +0300">
+			</result>
+		</query>
+		<query>
+			<formula>A[] not deadlock</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2026-07-21 12:52:53 +0300">
+			</result>
+		</query>
+	</queries>
+</nta>
