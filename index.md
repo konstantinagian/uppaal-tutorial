@@ -25,3 +25,4 @@
 - [Μέρος 1ο - Απλή υλοποίηση](IoTSystemV1.md) ([v1.xml](models/IoTSystemV1.xml))
 - [Μέρος 2ο - Προσθήκη ουράς](IoTSystemV2.md) ([v2.xml](models/IoTSystemV2.xml))
 - [Μέρος 3ο - Κάνοντας τις συσκευές non-blocking](IoTSystemV3.md) ([v3.xml](models/IoTSystemV3.xml))
+- [Μέρος 4ο - Statistical Model Checking](IoTSystemV4.md) ([v4.xml](models/IoTSystemV4.xml))
