@@ -194,7 +194,7 @@ simulate [<=200] {
 
 Η συγκεκριμένη προσομοίωση έγινε για Ν = 5 συσκευές, G = 2 gateways, Qmax = 3 στα gateways και Qmax = 5 στο cloud.
 
-![query result](images/simulations.png)
+![query result](images/simulationsv5.png)
 
 *Figure 5. Simulation result.*
 
